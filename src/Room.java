@@ -1,5 +1,5 @@
 public class Room {
-    private int number;
+    private final int number;
     private boolean available = true;
 
     public Room(int number) {

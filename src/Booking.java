@@ -1,6 +1,6 @@
 public class Booking {
-    private Room room;
-    private Guest guest;
+    private final Room room;
+    private final Guest guest;
 
     public Booking(Room room, Guest guest) {
         this.room = room;
@@ -25,3 +25,4 @@ public class Booking {
         return room.hashCode() + guest.hashCode();
     }
 }
+
