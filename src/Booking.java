@@ -1,28 +1,40 @@
 public class Booking {
-    private final Room room;
-    private final Guest guest;
+    private Room room;
+    private Guest guest;
+    private int nights;
 
-    public Booking(Room room, Guest guest) {
+    public Booking(Room room, Guest guest, int nights) {
         this.room = room;
         this.guest = guest;
-        room.book();
+        this.nights = nights;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public Guest getGuest() {
+        return guest;
+    }
+
+    public int getNights() {
+        return nights;
+    }
+
+    public int calculateTotalPrice() {
+        if (room instanceof price) {
+            return nights * ((price) room).getPricePerNight();
+        }
+        return 0;
     }
 
     @Override
     public String toString() {
-        return guest.getName() + " booked Room " + room.getNumber();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Booking)) return false;
-        Booking other = (Booking) obj;
-        return room.equals(other.room) && guest.equals(other.guest);
-    }
-
-    @Override
-    public int hashCode() {
-        return room.hashCode() + guest.hashCode();
+        return "Booking Details:\n" +
+                guest.toString() +
+                room.toString() +
+                "Nights: " + nights + "\n" +
+                "Total Price: " + calculateTotalPrice() + "$\n";
     }
 }
 

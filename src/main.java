@@ -5,55 +5,65 @@ import java.util.Scanner;
 public class main {
     public static void main(String[] args) {
         List<Room> rooms = new ArrayList<>();
-        rooms.add(new Room(101));
-        rooms.add(new Room(102));
-        rooms.add(new Room(103));
-        rooms.add(new Room(104));
-
-        List<Guest> guests = new ArrayList<>();
-        guests.add(new Guest("Alice"));
-        guests.add(new Guest("Bob"));
-
-        List<Booking> bookings = new ArrayList<>();
-        bookings.add(new Booking(rooms.get(0), guests.get(0)));
-        bookings.add(new Booking(rooms.get(1), guests.get(1)));
+        rooms.add(new price(100, "yes", "single room"));
+        rooms.add(new price(101, "yes", "double room"));
+        rooms.add(new price(102, "yes", "triple room"));
+        rooms.add(new price(103, "yes", "lux room"));
+        rooms.add(new price(104, "yes", "single room"));
+        rooms.add(new price(105, "yes", "double room"));
+        rooms.add(new price(106, "yes", "triple room"));
+        rooms.add(new price(107, "yes", "lux room"));
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\nMenu: \n1. Show all rooms \n2. Search room status \n3. Exit");
-            System.out.print("Choose an option: ");
+            System.out.println("\nWe have rooms 100-107 available");
+            System.out.println("To get room info, enter: 1");
+            System.out.println("To book a room, enter: 2");
+            System.out.println("To exit, enter: 3");
             int choice = scanner.nextInt();
 
             switch (choice) {
-                case 1:
-                    System.out.println("\nAll Rooms:");
-                    for (Room room : rooms) {
-                        System.out.println(room);
-                    }
-                    break;
-                case 2:
-                    System.out.print("Enter room number to search: ");
+                case 1: // Информация о комнате
+                    System.out.println("Enter room number:");
                     int roomNumber = scanner.nextInt();
-                    Room foundRoom = null;
-                    for (Room room : rooms) {
-                        if (room.getNumber() == roomNumber) {
-                            foundRoom = room;
-                            break;
-                        }
-                    }
-                    if (foundRoom != null) {
-                        System.out.println(foundRoom);
+                    Room room = findRoomByNumber(rooms, roomNumber);
+                    if (room != null) {
+                        System.out.println(room);
                     } else {
-                        System.out.println("Room not found.");
+                        System.out.println("Room not found!");
                     }
                     break;
-                case 3:
-                    System.out.println("Exiting...");
-                    scanner.close();
+
+                case 2: // Бронирование комнаты
+                    System.out.println("Enter room number to book:");
+                    int bookNumber = scanner.nextInt();
+                    Room roomToBook = findRoomByNumber(rooms, bookNumber);
+                    if (roomToBook != null && roomToBook.getAviable().equals("yes")) {
+                        System.out.println("Room booked successfully!");
+                        roomToBook.setAviable("no");
+                    } else if (roomToBook != null) {
+                        System.out.println("Room is already booked!");
+                    } else {
+                        System.out.println("Room not found!");
+                    }
+                    break;
+
+                case 3: // Выход
+                    System.out.println("Goodbye!");
                     return;
+
                 default:
-                    System.out.println("Invalid option. Try again.");
+                    System.out.println("Invalid choice! Try again.");
             }
         }
+    }
+
+    public static Room findRoomByNumber(List<Room> rooms, int number) {
+        for (Room room : rooms) {
+            if (room.getNumber() == number) {
+                return room;
+            }
+        }
+        return null;
     }
 }

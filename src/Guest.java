@@ -1,26 +1,34 @@
 public class Guest {
-    private final String name;
+    private int id;
+    private String name;
+    private String contactNumber;
 
-    public Guest(String name) {
+    public Guest(int id, String name, String contactNumber) {
+        this.id = id;
         this.name = name;
+        this.contactNumber = contactNumber;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
     @Override
     public String toString() {
-        return "Guest: " + name;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof Guest && name.equals(((Guest) obj).name);
-    }
-
-    @Override
-    public int hashCode() {
-        return name.hashCode();
+        return "Guest ID: " + id + "\n" +
+                "Name: " + name + "\n" +
+                "Contact: " + contactNumber + "\n";
     }
 }
