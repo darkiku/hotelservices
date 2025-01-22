@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         String url = "jdbc:postgresql://localhost:5432/postgres";
         String user = "postgres";
-        String password = "555mncd55";
+        String password = "55555";
 
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             System.out.println("Connected to the PostgreSQL database!");
